@@ -2,10 +2,10 @@ jdk:
   - oraclejdk8
 rvm:
   - 1.9.3
-  - 2.0.0
-  - jruby
-  - 2.1.2
-  - ruby-head
+#  - 2.0.0
+#  - jruby
+#  - 2.1.2
+#  - ruby-head
 notifications:
   recipients:
     - jari.bakken@gmail.com
@@ -13,11 +13,15 @@ notifications:
 before_script:
   - ./install.sh
 env:
-  - localhost=localhost.localdomain DISPLAY=:99 WD_SPEC_DRIVER=unit
-  - localhost=localhost.localdomain DISPLAY=:99 WD_SPEC_DRIVER=firefox
+  ##- localhost=localhost.localdomain DISPLAY=:99 WD_SPEC_DRIVER=unit
+ # - localhost=localhost.localdomain DISPLAY=:99 WD_SPEC_DRIVER=firefox
   - localhost=localhost.localdomain DISPLAY=:99 WD_SPEC_DRIVER=chrome chrome_server=./chrome-linux/chromedriver chrome_binary=./chrome-linux/chrome
-  - localhost=localhost.localdomain DISPLAY=:99 WD_SPEC_DRIVER=remote
-  - localhost=localhost.localdomain DISPLAY=:99 WD_SPEC_DRIVER=rc_client SELENIUM_RC_TIMEOUT=120
+#  - localhost=localhost.localdomain DISPLAY=:99 WD_SPEC_DRIVER=remote
+ # - localhost=localhost.localdomain DISPLAY=:99 WD_SPEC_DRIVER=rc_client SELENIUM_RC_TIMEOUT=120
 matrix:
   allow_failures:
     - rvm: ruby-head
+    
+after_script:
+  - chmod u+x ./travis.sh
+  - bash -c ./travis.sh
